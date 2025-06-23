@@ -6,13 +6,15 @@ import {DiscoveryService} from '../../../shared/services/impl/discovery.service'
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {ActivatedRoute} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-discovery-item-list',
   imports: [
     DiscoveryItemComponent,
     FaIconComponent,
-    FormsModule
+    FormsModule,
+    NgClass
   ],
   templateUrl: './discovery-item-list.component.html',
   styleUrl: './discovery-item-list.component.css'
@@ -23,19 +25,24 @@ export class DiscoveryItemListComponent implements OnInit {
 
   constructor(private discoveryService: DiscoveryService, private activatedRoute: ActivatedRoute) {
   }
-
+ selectedType: string = '';
   discoveryItems!: DiscoveryItem[];
   types!: string[];
 
   ngOnInit(): void {
-    this.discoveryService.getAll().subscribe(
-      {
-        next: value => {
-          this.types = value.results.types;
-          this.discoveryItems = value.results.etablissements;
-        }
+
+    this.refresh();
+
+
+  }
+
+  refresh(): void {
+    this.discoveryService.getAll(6, 0, this.searchTerm, this.selectedType).subscribe({
+      next: value => {
+        this.types = value.results.types;
+        this.discoveryItems = value.results.etablissements;
       }
-    );
+    });
   }
 
   protected readonly faHouse = faHouse;
@@ -46,7 +53,7 @@ export class DiscoveryItemListComponent implements OnInit {
   }
 
   onFiltrer(type: string) {
-    // console.log(type)
+    this.selectedType = type;
     this.discoveryService.getAll(5,0,"", type).subscribe(
       {
         next: value => {
