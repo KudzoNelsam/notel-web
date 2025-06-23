@@ -4,12 +4,15 @@ import {DiscoveryItemComponent} from '../discovery-item/discovery-item.component
 import {DiscoveryItem} from '../../../shared/models/discovery-item.model';
 import {DiscoveryService} from '../../../shared/services/impl/discovery.service';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {ActivatedRoute} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-discovery-item-list',
   imports: [
     DiscoveryItemComponent,
-    FaIconComponent
+    FaIconComponent,
+    FormsModule
   ],
   templateUrl: './discovery-item-list.component.html',
   styleUrl: './discovery-item-list.component.css'
@@ -18,7 +21,7 @@ export class DiscoveryItemListComponent implements OnInit {
   faSearch = faSearch;
   faSpiral = faSpinner;
 
-  constructor(private discoveryService: DiscoveryService) {
+  constructor(private discoveryService: DiscoveryService, private activatedRoute: ActivatedRoute) {
   }
 
   discoveryItems!: DiscoveryItem[];
@@ -36,13 +39,33 @@ export class DiscoveryItemListComponent implements OnInit {
   }
 
   protected readonly faHouse = faHouse;
+  searchTerm: string = '';
 
   onDecouvrir() {
     console.log("onDecouvrir");
   }
 
   onFiltrer(type: string) {
-    
+    // console.log(type)
+    this.discoveryService.getAll(5,0,"", type).subscribe(
+      {
+        next: value => {
+          this.types = value.results.types;
+          this.discoveryItems = value.results.etablissements;
+        }
+      }
+    );
+  }
+
+  onSearch(champ: string) {
+    this.discoveryService.getAll(5,0,champ, "").subscribe(
+      {
+        next: value => {
+          this.types = value.results.types;
+          this.discoveryItems = value.results.etablissements;
+        }
+      }
+    );
   }
 }
 

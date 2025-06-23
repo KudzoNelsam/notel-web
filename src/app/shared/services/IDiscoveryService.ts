@@ -3,5 +3,6 @@ import {RestResponse} from '../models/rest-response';
 import {HomeResponseModel} from '../models/home-response.model';
 
 export interface IDiscoveryService {
-  getAll(): Observable<RestResponse<HomeResponseModel>>;
+  getAll(size?: number,  page?: number, champ?:string, type?:string): Observable<RestResponse<HomeResponseModel>>;
+
 }

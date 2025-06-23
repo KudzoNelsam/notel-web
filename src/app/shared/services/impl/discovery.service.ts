@@ -39,8 +39,10 @@ export class DiscoveryService implements IDiscoveryService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(): Observable<RestResponse<HomeResponseModel>> {
-    return this.http.get<RestResponse<HomeResponseModel>>(ENDPOINTS.ETABLISSEMENTS+"?size=6");
+  getAll(
+    size:number = 6, page:number=0, champ:string="", type:string=""
+  ): Observable<RestResponse<HomeResponseModel>> {
+    return this.http.get<RestResponse<HomeResponseModel>>(ENDPOINTS.ETABLISSEMENTS+`?size=${size}&page=${page}&champ=${champ}&type=${type}`);
     // return of(this.discoveryItems);
   }
 }
