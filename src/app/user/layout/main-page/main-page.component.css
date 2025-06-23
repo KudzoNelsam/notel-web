@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.content-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 70px;
+}
+
+.fixed-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
