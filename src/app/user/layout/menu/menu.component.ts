@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { faHouse, faCompass, faStar, faBolt, faUser } from '@fortawesome/free-solid-svg-icons';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {Router} from '@angular/router';
+import {PATHS} from '../../../routes/paths';
 
 @Component({
   selector: 'app-menu',
@@ -25,7 +26,7 @@ export class MenuComponent {
     this.router.navigateByUrl('');
   }
   onExplorer() {
-    this.router.navigateByUrl('explorer');
+    this.router.navigateByUrl(PATHS.HOME + '/' + PATHS.EXPLORER);
   }
 }
 

@@ -3,13 +3,22 @@
     <!-- Titre -->
     <div class="text-center">
       <h1 class="text-lg font-bold text-gray-900">NOTÉL APP</h1>
-      <p class="text-xs text-gray-500">Mode Invité</p>
+      <p class="text-xs text-gray-500">Mode {{mode()}}</p>
     </div>
     <!-- Bouton connexion -->
     <div>
-      <button class="bg-blue-600 text-white text-sm px-4 py-1.5 rounded-md hover:bg-blue-700">
-        Se connecter
-      </button>
+      @if (isConnected()){
+        <button class="bg-blue-600 text-white text-sm px-4 py-1.5 rounded-md hover:bg-blue-700"
+                (click)="onLogin()">
+          Se connecter
+        </button>
+      } @else {
+        <button class="bg-blue-600 text-white text-sm px-4 py-1.5 rounded-md hover:bg-blue-700"
+                (click)="onLogout()">
+          Deconnecter
+        </button>
+      }
+
     </div>
   </div>
 </header>

@@ -1,3 +1,6 @@
 export const PATHS = {
-  EXPLORER : "explorer"
+  EXPLORER: `explorer`,
+  HOME: "accueil",
+  LOGIN: "login",
+
 }

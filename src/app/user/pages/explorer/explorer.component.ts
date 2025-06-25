@@ -1,10 +1,13 @@
 import {Component, Input} from '@angular/core';
 import {DiscoveryItem} from '../../../shared/models/discovery-item.model';
 import {Review} from '../../../shared/models/review-model';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-explorer',
-  imports: [],
+  imports: [
+    NgClass
+  ],
   templateUrl: './explorer.component.html',
   styleUrl: './explorer.component.css'
 })
