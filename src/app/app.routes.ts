@@ -10,7 +10,7 @@ export const routes: Routes = [
   {
     path: PATHS.HOME,
     component: MainPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [],
     children: [
       {
         path: '',
@@ -18,7 +18,8 @@ export const routes: Routes = [
       },
       {
         path: PATHS.EXPLORER,
-        component: ExplorerComponent
+        component: ExplorerComponent,
+        canActivate: [AuthGuard]
 
       }
     ]
@@ -29,7 +30,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: PATHS.HOME,
     pathMatch: 'full'
   }
 ];
