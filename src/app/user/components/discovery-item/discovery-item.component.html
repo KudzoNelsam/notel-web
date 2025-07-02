@@ -1,4 +1,4 @@
-<div class="rounded-xl shadow-md overflow-hidden bg-white mx-auto w-full">
+<div class="rounded-xl shadow-md overflow-hidden bg-white mx-auto w-full" (click)="onGetDetail(discoveryItem.id)">
   <!-- Image -->
   <div class="relative overflow-hidden">
     <img [src]="discoveryItem.profil" alt="{{ discoveryItem.title }}" class="rounded-lg w-[600px] h-[300px] object-cover hover:scale-110 transition-all duration-200" />

@@ -14,7 +14,7 @@ import {Mapper} from '../../../shared/services/mappers/Mapper';
 export class ExplorerComponent implements OnInit {
 
   @Input() item!: DiscoveryItemDetails;
-  idEtablissement : number = 1;
+  idEtablissement : number = -8;
 
   constructor(private discoveryService: DiscoveryService,
               private activatedRoute: ActivatedRoute,
@@ -23,15 +23,27 @@ export class ExplorerComponent implements OnInit {
 
   ngOnInit(): void {
     // récupérer l'id de la requête
-    this.idEtablissement = this.activatedRoute.snapshot.params['id'] ?? 1;
-    this.discoveryService.getOne(this.idEtablissement).subscribe(
-      {
-        next: result => {
-          console.log(result.results);
-          this.item = this.mapper.mapResponseToDetails(result.results);
+    this.idEtablissement = this.activatedRoute.snapshot.params['id'];
+    if (this.idEtablissement) {
+      this.discoveryService.getOne(this.idEtablissement).subscribe(
+        {
+          next: result => {
+            console.log(result.results);
+            this.item = this.mapper.mapResponseToDetails(result.results);
+          }
         }
-      }
-    )
+      )
+    }else{
+      this.discoveryService.getAleatoire().subscribe(
+        {
+          next: result => {
+            console.log(result.results);
+            this.item = this.mapper.mapResponseToDetails(result.results);
+          }
+        }
+      )
+    }
+
 
 
   }

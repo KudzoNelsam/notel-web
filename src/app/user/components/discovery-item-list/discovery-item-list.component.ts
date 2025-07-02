@@ -6,6 +6,8 @@ import {DiscoveryService} from '../../../shared/services/impl/discovery.service'
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
 import {NgClass} from '@angular/common';
+import {Router} from '@angular/router';
+import {PATHS} from '../../../routes/paths';
 
 @Component({
   selector: 'app-discovery-item-list',
@@ -22,17 +24,14 @@ export class DiscoveryItemListComponent implements OnInit {
   faSearch = faSearch;
   faSpiral = faSpinner;
 
-  constructor(private discoveryService: DiscoveryService) {
+  constructor(private discoveryService: DiscoveryService, private route: Router) {
   }
  selectedType: string = '';
   discoveryItems!: DiscoveryItem[];
   types!: string[];
 
   ngOnInit(): void {
-
     this.refresh();
-
-
   }
 
   refresh(): void {
@@ -49,7 +48,7 @@ export class DiscoveryItemListComponent implements OnInit {
   searchTerm: string = '';
 
   onDecouvrir() {
-    console.log("onDecouvrir");
+    this.route.navigateByUrl(`${PATHS.HOME}/${PATHS.EXPLORER}`);
   }
 
   onFiltrer(type: string) {

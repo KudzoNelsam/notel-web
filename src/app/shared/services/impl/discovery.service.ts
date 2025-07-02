@@ -51,4 +51,8 @@ export class DiscoveryService implements IDiscoveryService {
   getOne(id : number): Observable<RestResponse<DiscoveryItemDetails>> {
     return this.http.get<RestResponse<DiscoveryItemDetails>>(ENDPOINTS.ETABLISSEMENTS_DETAIL + '/' + id) ;
   }
+
+  getAleatoire(): Observable<RestResponse<DiscoveryItemDetails>> {
+    return this.http.get<RestResponse<DiscoveryItemDetails>>(ENDPOINTS.ETABLISSEMENTS_ALEATOIRE) ;
+  }
 }

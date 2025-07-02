@@ -6,4 +6,5 @@ import {DiscoveryItemDetails} from '../models/discovery-detail.model';
 export interface IDiscoveryService {
   getAll(size?: number,  page?: number, champ?:string, type?:string): Observable<RestResponse<HomeResponseModel>>;
   getOne(id : number) : Observable<RestResponse<DiscoveryItemDetails>>;
+  getAleatoire() : Observable<RestResponse<DiscoveryItemDetails>>;
 }
