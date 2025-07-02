@@ -7,5 +7,4 @@ export interface DiscoveryItem {
   nbrAvis: number;
   tags: string[];
   type: string;
-
 }

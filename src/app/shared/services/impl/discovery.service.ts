@@ -1,16 +1,18 @@
 import {Injectable} from '@angular/core';
 import {IDiscoveryService} from '../IDiscoveryService';
 import {DiscoveryItem} from '../../models/discovery-item.model';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {RestResponse} from '../../models/rest-response';
 import {ENDPOINTS} from '../../../../environments/endPoints';
 import {HomeResponseModel} from '../../models/home-response.model';
+import {DiscoveryItemDetails} from '../../models/discovery-detail.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiscoveryService implements IDiscoveryService {
+
 
 
   discoveryItems: DiscoveryItem[] = [
@@ -44,5 +46,9 @@ export class DiscoveryService implements IDiscoveryService {
   ): Observable<RestResponse<HomeResponseModel>> {
     return this.http.get<RestResponse<HomeResponseModel>>(ENDPOINTS.ETABLISSEMENTS+`?size=${size}&page=${page}&champ=${champ}&type=${type}`);
     // return of(this.discoveryItems);
+  }
+
+  getOne(id : number): Observable<RestResponse<DiscoveryItemDetails>> {
+    return this.http.get<RestResponse<DiscoveryItemDetails>>(ENDPOINTS.ETABLISSEMENTS_DETAIL + '/' + id) ;
   }
 }

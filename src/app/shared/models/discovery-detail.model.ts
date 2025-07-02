@@ -1,9 +1,11 @@
 import {DiscoveryItem} from './discovery-item.model';
+import {Review} from './review-model';
 
 export interface DiscoveryItemDetails extends DiscoveryItem {
-  phone?: string;
-  isOpen?: boolean;
-  closingTime?: string;
-  description?: string;
-  photos?: string[];
+  description: string;
+  phone: string; // <- correspond à telephone
+  isOpen: boolean;
+  closingTime: string; // <- correspond à heureFermeture
+  openingTime: string; // <- correspond à heureOuverture
+  reviews: Review[];   // <- transformé à partir de avis[]
 }

@@ -1,27 +1,16 @@
-<nav class="flex justify-around items-center py-2">
-  <button class="flex flex-col items-center text-xs text-gray-600 hover:text-purple-700"
+<nav class="flex justify-around items-center py-2 bg-white shadow-md rounded-xl">
+  @for (item of menuItems; track item.label) {
+    <button class="flex flex-col items-center text-xs px-3 py-2 rounded-lg"
+            [ngClass]="{
+              'text-blue-600 bg-blue-50': isAllowed(item),
+              'text-gray-600 hover:text-purple-700': isAllowed(item),
+              'text-gray-400 cursor-not-allowed': !isAllowed(item)
+            }"
+            [disabled]="!isAllowed(item)"
+            (click)="isAllowed(item) && item.action()">
 
-  (click)="onAccueil()"
-  >
-    <fa-icon [icon]="faHouse" class="text-lg mb-1"></fa-icon>
-    Accueil
-  </button>
-  <button class="flex flex-col items-center text-xs text-gray-600 hover:text-purple-700"
-
-  (click)="onExplorer()">
-    <fa-icon [icon]="faCompass" class="text-lg mb-1"></fa-icon>
-    Explorer
-  </button>
-  <button class="flex flex-col items-center text-xs text-gray-600 hover:text-purple-700">
-    <fa-icon [icon]="faStar" class="text-lg mb-1"></fa-icon>
-    Noter
-  </button>
-  <button class="flex flex-col items-center text-xs text-gray-600 hover:text-purple-700">
-    <fa-icon [icon]="faBolt" class="text-lg mb-1"></fa-icon>
-    Défis
-  </button>
-  <button class="flex flex-col items-center text-xs text-gray-600 hover:text-purple-700">
-    <fa-icon [icon]="faUser" class="text-lg mb-1"></fa-icon>
-    Offres
-  </button>
+      <fa-icon [icon]="item.icon" class="text-lg mb-1"></fa-icon>
+      {{ item.label }}
+    </button>
+  }
 </nav>

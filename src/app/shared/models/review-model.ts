@@ -1,10 +1,11 @@
 export interface Review {
-  id: string;
-  customerName: string;
-  customerInitial: string;
+  id: number;
+  rating: number;         // <- correspond à note
+  comment: string;        // <- correspond à description
+  title: string;          // <- correspond à titre
   date: string;
-  rating: number;
-  comment: string;
-  photos?: string[];
-  commentCount: number;
+  customerName: string;   // <- correspond à utilisateur
+  photos: string[];
+  commentCount: number;   // <- correspond à nbrCommentaires
 }
+

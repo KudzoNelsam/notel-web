@@ -4,7 +4,6 @@ import {DiscoveryItemComponent} from '../discovery-item/discovery-item.component
 import {DiscoveryItem} from '../../../shared/models/discovery-item.model';
 import {DiscoveryService} from '../../../shared/services/impl/discovery.service';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
-import {ActivatedRoute} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {NgClass} from '@angular/common';
 
@@ -23,7 +22,7 @@ export class DiscoveryItemListComponent implements OnInit {
   faSearch = faSearch;
   faSpiral = faSpinner;
 
-  constructor(private discoveryService: DiscoveryService, private activatedRoute: ActivatedRoute) {
+  constructor(private discoveryService: DiscoveryService) {
   }
  selectedType: string = '';
   discoveryItems!: DiscoveryItem[];
@@ -39,6 +38,7 @@ export class DiscoveryItemListComponent implements OnInit {
   refresh(): void {
     this.discoveryService.getAll(6, 0, this.searchTerm, this.selectedType).subscribe({
       next: value => {
+        console.log(value);
         this.types = value.results.types;
         this.discoveryItems = value.results.etablissements;
       }

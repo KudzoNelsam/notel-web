@@ -1,4 +1,4 @@
-import {Injectable, signal} from '@angular/core';
+import {computed, Injectable, signal} from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import {UserModel} from '../../models/user-model';
 import {IAuthenticationService} from '../IAuthenticationService';
@@ -40,7 +40,7 @@ export class AuthenticationService implements IAuthenticationService {
 
   private isAuthenticated = signal<boolean>(false);
   private currentUser = signal<UserModel | null>(null);
-
+  readonly roleSignal = computed(() => this.currentUser()?.role ?? 'Visiteur');
   constructor(private cookieService: CookieService) {
     this.loadUserFromCookies();
   }
