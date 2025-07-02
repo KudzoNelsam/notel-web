@@ -34,31 +34,32 @@ export class MenuComponent {
       label: 'Accueil',
       icon: this.faHouse,
       action: () => this.onAccueil(),
-      rolesAllowed: ['Visiteur', 'Utilisateur', 'Entreprise', 'Administrateur']
+      rolesAllowed: ['Visiteur', 'Utilisateur', 'Entreprise', 'Administrateur'],
     },
     {
       label: 'Explorer',
       icon: this.faCompass,
       action: () => this.onExplorer(),
-      rolesAllowed: ['Utilisateur', 'Entreprise', 'Administrateur']
+      rolesAllowed: ['Visiteur','Utilisateur', 'Entreprise', 'Administrateur'],
+      isVisible: false
     },
     {
       label: 'Noter',
       icon: this.faStar,
-      action: () => console.log('Noter'),
-      rolesAllowed: ['Utilisateur']
+      action: () => this.onNoter(),
+      rolesAllowed: ['Visiteur','Utilisateur']
     },
     {
       label: 'Défis',
       icon: this.faBolt,
-      action: () => console.log('Défis'),
-      rolesAllowed: ['Entreprise']
+      action: () => this.onDefis(),
+      rolesAllowed: ['Visiteur', 'Entreprise']
     },
     {
       label: 'Offres',
       icon: this.faUser,
       action: () => console.log('Offres'),
-      rolesAllowed: ['Administrateur', 'Entreprise']
+      rolesAllowed: ['Visiteur', 'Administrateur', 'Entreprise']
     }
   ];
 
@@ -72,6 +73,15 @@ export class MenuComponent {
 
   isAllowed(item: any): boolean {
     return item.rolesAllowed.includes(this.role());
+  }
+
+  private onNoter() {
+    this.router.navigateByUrl(PATHS.HOME + '/' + PATHS.NOTER);
+
+  }
+
+  private onDefis() {
+
   }
 }
 

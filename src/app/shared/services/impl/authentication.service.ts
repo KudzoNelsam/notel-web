@@ -41,15 +41,17 @@ export class AuthenticationService implements IAuthenticationService {
   private isAuthenticated = signal<boolean>(false);
   private currentUser = signal<UserModel | null>(null);
   readonly roleSignal = computed(() => this.currentUser()?.role ?? 'Visiteur');
+
   constructor(private cookieService: CookieService) {
     this.loadUserFromCookies();
   }
 
   login(username: string): boolean {
     const user = this.users.find(u => u.username === username);
+
     if (user) {
-      this.currentUser.set(user);
-      this.isAuthenticated.set(true);
+      this.currentUser.update(() => user);
+      this.isAuthenticated.update(() => true);
       this.cookieService.set('auth_username', user.username);
       this.cookieService.set('auth_role', user.role);
       if (user.avatarUrl) this.cookieService.set('auth_avatar', user.avatarUrl);
@@ -59,8 +61,8 @@ export class AuthenticationService implements IAuthenticationService {
   }
 
   logout(): void {
-    this.isAuthenticated.set(false);
-    this.currentUser.set(null);
+    this.isAuthenticated.update(() => false);
+    this.currentUser.update(() => null);
     this.cookieService.delete('auth_username');
     this.cookieService.delete('auth_role');
     this.cookieService.delete('auth_avatar');
@@ -91,14 +93,13 @@ export class AuthenticationService implements IAuthenticationService {
     if (username) {
       const user = this.users.find(u => u.username === username);
       if (user) {
-        this.currentUser.set(user);
-        this.isAuthenticated.set(true);
+        this.currentUser.update(() => user);
+        this.isAuthenticated.update(() => true);
       }
     }
   }
 
   test() {
-    this.isAuthenticated.set(true);
-
+    this.isAuthenticated.update(() => true);
   }
 }

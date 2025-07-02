@@ -1,16 +1,19 @@
 <nav class="flex justify-around items-center py-2 bg-white shadow-md rounded-xl">
   @for (item of menuItems; track item.label) {
-    <button class="flex flex-col items-center text-xs px-3 py-2 rounded-lg"
-            [ngClass]="{
+<!--    @if (item.isVisible){-->
+      <button class="flex flex-col items-center text-xs px-3 py-2 rounded-lg"
+              [ngClass]="{
               'text-blue-600 bg-blue-50': isAllowed(item),
               'text-gray-600 hover:text-purple-700': isAllowed(item),
               'text-gray-400 cursor-not-allowed': !isAllowed(item)
             }"
-            [disabled]="!isAllowed(item)"
-            (click)="isAllowed(item) && item.action()">
+              [disabled]="!isAllowed(item)"
+              (click)="isAllowed(item) && item.action()">
 
-      <fa-icon [icon]="item.icon" class="text-lg mb-1"></fa-icon>
-      {{ item.label }}
-    </button>
+        <fa-icon [icon]="item.icon" class="text-lg mb-1"></fa-icon>
+        {{ item.label }}
+      </button>
+<!--    }-->
+
   }
 </nav>

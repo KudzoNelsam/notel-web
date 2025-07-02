@@ -1,5 +1,7 @@
 <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
   <div class="flex items-center justify-around px-4 py-3">
+<!--    <p>{{isConnected()}}</p>-->
+    <p>{{mode()}}</p>
     <!-- Titre -->
     <div class="text-center">
       <h1 class="text-lg font-bold text-gray-900">NOTÉL APP</h1>
@@ -7,12 +9,13 @@
     </div>
     <!-- Bouton connexion -->
     <div>
-      @if (isConnected()){
+      @if (!isConnected()){
         <button class="bg-blue-600 text-white text-sm px-4 py-1.5 rounded-md hover:bg-blue-700"
                 (click)="onLogin()">
           Se connecter
         </button>
-      } @else {
+      }
+      @else {
         <button class="bg-blue-600 text-white text-sm px-4 py-1.5 rounded-md hover:bg-blue-700"
                 (click)="onLogout()">
           Deconnecter

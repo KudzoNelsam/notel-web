@@ -3,5 +3,6 @@ export const PATHS = {
   EXPLORER_DETAIL: `etablissements/:id`,
   HOME: "accueil",
   LOGIN: "login",
+  NOTER: "noter",
 
 }
